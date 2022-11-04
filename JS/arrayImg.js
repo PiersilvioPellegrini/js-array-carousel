@@ -8,17 +8,18 @@ const img = [
     "IMG/05.webp",
 ];
 
-// VARIABILI
-let currentImage = 0;
-
-// creo una variabile per contenere l'elemento html
-const sliderImgEl = document.querySelector(".img-container");
+let ImgEl = document.getElementById("slide");
 const btnNext = document.getElementById("next");
 const btnPrev = document.getElementById("prev");  
 
 
+
+// VARIABILI
 // assegno alla variabile l'immagine in posizione 0
-sliderImgEl.src = img[currentImage];
+let currentImage = 0;
+
+
+ ImgEl.src = img[currentImage];
 
 
   // evento bottone Prev
@@ -27,14 +28,15 @@ sliderImgEl.src = img[currentImage];
     // decremento l'indice dell'array
     currentImage--;
     console.log(currentImage);
+    const lastImage = img.length - 1;
     
     // controllo che l'indice non sia minore di 0
     if (currentImage < 0) {
-      currentImage = 0;
+      currentImage = lastImage;
     }
   
     // assegno l'immagine della posizone corrente
-    sliderImgEl.src = img[currentImage];
+    ImgEl.src = img[currentImage];
   });
   
   // evento bottone Next
@@ -56,7 +58,7 @@ sliderImgEl.src = img[currentImage];
       currentImage = 0;
     }
     // assegno l'immagine della posizone corrente
-    sliderImgEl.src = img[currentImage];
+    ImgEl.src = img[currentImage];
   
     
   });
