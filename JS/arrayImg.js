@@ -16,13 +16,18 @@ const btnPrev = document.getElementById("prev");
 // assegno alla variabile l'immagine in posizione 0
 let currentImageIndex = 0;
 
+// CICLO PER LA CREAZIONE DI ELEMENTI IMG
 for (let i = 0; i < img.length; i++) {
+  // assegno alla variabile l'indice dell'array
   const currentImage = img[i];
   console.log(currentImage);
   const ImgEl = document.createElement("img");
+  // inserisco dentro src la sorgente img
   ImgEl.src = currentImage;
+  // inserisco nel contenitore l'elemento
   imgContainer.append(ImgEl);
 
+  // nascondo tutte le immagini tranne la prima
   if (i === currentImageIndex) {
     ImgEl.classList.add("active");
   }
@@ -50,11 +55,12 @@ btnPrev.addEventListener("click", function () {
 // evento bottone Next
 btnNext.addEventListener("click", function () {
   console.log("click next");
-  // incremento l'indice dell'array
+ //elimino la classe active all'immagine precedente
   const oldImgEl = imgContainer.querySelector(".active");
   oldImgEl.classList.remove("active");
   
   currentImageIndex++;
+  
   const imgElements = imgContainer.querySelectorAll("img");
   const newImgEl = imgElements[currentImageIndex];
   newImgEl.classList.add("active");
