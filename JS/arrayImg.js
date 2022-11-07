@@ -8,15 +8,13 @@ const img = [
   "IMG/05.webp",
 ];
 
-const imgContainer = document.getElementById("img-container");
+const imgContainer = document.querySelector(".img-container");
 const btnNext = document.getElementById("next");
 const btnPrev = document.getElementById("prev");
 
 // VARIABILI
 // assegno alla variabile l'immagine in posizione 0
-//  let currentImage = 0;
-
-// ImgEl.src = img[currentImage];
+let currentImageIndex = 0;
 
 for (let i = 0; i < img.length; i++) {
   const currentImage = img[i];
@@ -24,39 +22,51 @@ for (let i = 0; i < img.length; i++) {
   const ImgEl = document.createElement("img");
   ImgEl.src = currentImage;
   imgContainer.append(ImgEl);
+
+  if (i === currentImageIndex) {
+    ImgEl.classList.add("active");
+  }
 }
 // evento bottone Prev
 btnPrev.addEventListener("click", function () {
   console.log("click prev");
   // decremento l'indice dell'array
-  currentImage--;
-  console.log(currentImage);
+  const oldImgEl = imgContainer.querySelector(".active");
+  oldImgEl.classList.remove("active");
+  currentImageIndex--;
+  console.log(currentImageIndex);
+  
+  const imgElements = imgContainer.querySelectorAll("img");
+  const newImgEl = imgElements[currentImageIndex];
+  newImgEl.classList.add("active");
   const lastImage = img.length - 1;
 
   // controllo che l'indice non sia minore di 0
-  if (currentImage < 0) {
-    currentImage = lastImage;
+  if (currentImageIndex < 0) {
+    currentImageIndex = 0;
   }
-
-  // assegno l'immagine della posizone corrente
-  ImgEl.src = img[currentImage];
 });
 
 // evento bottone Next
 btnNext.addEventListener("click", function () {
   console.log("click next");
-
   // incremento l'indice dell'array
-  currentImage++;
-  console.log(currentImage);
+  const oldImgEl = imgContainer.querySelector(".active");
+  oldImgEl.classList.remove("active");
+  
+  currentImageIndex++;
+  const imgElements = imgContainer.querySelectorAll("img");
+  const newImgEl = imgElements[currentImageIndex];
+  newImgEl.classList.add("active");
+  
+  console.log(currentImageIndex);
   // variabile con l'ultimo indice dell'array
-  const lastImage = img.length - 1;
+  const lastImage = img.length ;
 
   // verifico la posizione dell'indice
-  if (currentImage > lastImage) {
+  if (currentImageIndex > lastImage) {
     // lo riporta su zero
-    currentImage = 0;
+    currentImageIndex = lastImage;
   }
-  // assegno l'immagine della posizone corrente
-  ImgEl.src = img[currentImage];
+
 });
